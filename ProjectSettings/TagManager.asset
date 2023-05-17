@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Astroid
   - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

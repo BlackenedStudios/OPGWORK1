@@ -19,12 +19,18 @@ public class PlayerController : MonoBehaviour
     private float _input;
 
     private bool _upgrade = false;
-
+    private float _upgradeTimer = 0;
     public static PlayerController instance;
 
     private void Awake()
     {
         Construct();
+    }
+
+    public void AddBuff()
+    {
+        _upgrade = true;
+        _upgradeTimer = 5;
     }
     private void Construct()
     {
@@ -71,10 +77,20 @@ public class PlayerController : MonoBehaviour
                 Shoot(weaponPosition.position);
             }
         }
+
+        if (_upgrade)
+        {
+            _upgradeTimer -= Time.deltaTime;
+
+            if(_upgradeTimer < 0)
+            {
+                _upgrade = false;
+            }
+        }
     }
     private void Movement()
     {
-        _rigidbody.MovePosition(new Vector3(Mathf.Clamp(_rigidbody.position.x + _input * 0.5f , -playableAreaLimit , playableAreaLimit), -2.5f, 0));
+        _rigidbody.MovePosition(new Vector3(Mathf.Clamp(_rigidbody.position.x + _input * 0.25f , -playableAreaLimit , playableAreaLimit), -2.5f, 0));
         visual.rotation = Quaternion.Lerp(visual.rotation, Quaternion.Euler(-90, -45 * _input, 0), Time.deltaTime * 10);
     }
 

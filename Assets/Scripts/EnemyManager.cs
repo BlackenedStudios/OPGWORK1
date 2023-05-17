@@ -7,6 +7,17 @@ public class EnemyManager : MonoBehaviour
     private int direction = 1;
 
     private float countDown = 0;
+
+    public GameObject explosionObject;
+
+    private void ExplosionEffect()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Instantiate(explosionObject, transform.position, Quaternion.identity).GetComponent<Renderer>().material = GetComponentInChildren<Renderer>().material;
+        }
+    }
+
     private void FixedUpdate()
     {
         if(countDown > 0) transform.Translate(Vector3.down * Time.deltaTime);
@@ -25,6 +36,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            ExplosionEffect();
             Destroy(gameObject);
         }
     }
