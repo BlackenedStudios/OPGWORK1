@@ -20,12 +20,18 @@ public class PlayerController : MonoBehaviour
 
     private bool _upgrade = false;
 
+    public static PlayerController instance;
+
     private void Awake()
     {
         Construct();
     }
     private void Construct()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
 
@@ -70,5 +76,13 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.MovePosition(new Vector3(Mathf.Clamp(_rigidbody.position.x + _input * 0.5f , -playableAreaLimit , playableAreaLimit), -2.5f, 0));
         visual.rotation = Quaternion.Lerp(visual.rotation, Quaternion.Euler(-90, -45 * _input, 0), Time.deltaTime * 10);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Astroid"))
+        {
+            other.GetComponent<Astroid>().OnHitPlayer();
+        }
     }
 }

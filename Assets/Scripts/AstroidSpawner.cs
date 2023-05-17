@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AstroidSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject astroidPrefab;
 
-    // Update is called once per frame
-    void Update()
+    private float _time;
+    private void Update()
     {
-        
+        if(Time.time > _time)
+        {
+            Instantiate(astroidPrefab,transform.position + Vector3.right * Random.Range(-3,3),Quaternion.identity);
+            _time = Time.time + 3;
+        }
     }
 }
