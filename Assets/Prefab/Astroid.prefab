@@ -157,3 +157,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 80897995ec72aff4d9cb0a744f548e61, type: 2}
   - {fileID: 2100000, guid: c6b7faadcc7880c4096403f3803c6f76, type: 2}
   - {fileID: 2100000, guid: a58ef90893280104abb081cecf038ca2, type: 2}
+  explosionObject: {fileID: 6793800404494649666, guid: 9bac487449c12c245b9b10ce93c34578, type: 3}

@@ -12,7 +12,7 @@ public class AstroidSpawner : MonoBehaviour
         if(Time.time > _time)
         {
             Instantiate(astroidPrefab,transform.position + Vector3.right * Random.Range(-3,3),Quaternion.identity);
-            _time = Time.time + 3;
+            _time = Time.time + 1;
         }
     }
 }

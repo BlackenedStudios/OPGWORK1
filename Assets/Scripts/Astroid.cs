@@ -7,6 +7,8 @@ public class Astroid : MonoBehaviour
     public List<Mesh> meshes;
     public List<Material> materials;
 
+    public GameObject explosionObject;
+
     private MeshFilter _filter;
     private MeshRenderer _renderer;
 
@@ -33,13 +35,24 @@ public class Astroid : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            ExplosionEffect();
+
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
     public void OnHitPlayer()
     {
-        
+        ExplosionEffect();
+
+        Destroy(gameObject);
+    }
+    private void ExplosionEffect()
+    {
+        for(int i = 0; i < 5;i++)
+        {
+            Instantiate(explosionObject, transform.position, Quaternion.identity).GetComponent<Renderer>().material = _renderer.material;
+        }
     }
     private void FixedUpdate()
     {
