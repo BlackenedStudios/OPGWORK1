@@ -12,11 +12,30 @@ public class Astroid : MonoBehaviour
     private MeshFilter _filter;
     private MeshRenderer _renderer;
 
-    private int direction = 1;
+    private int direction = 0;
+
+    private bool small = false;
 
     private void Awake()
     {
         Construct();
+    }
+    private void Start()
+    {
+        if (direction == 0)
+        {
+            if (Random.Range(0, 10) > 5)
+                direction = -1;
+            else
+                direction = 1;
+        }
+    }
+    public void ConstructedAgain(int d,Vector3 pos)
+    {
+        transform.position = pos;
+        direction = d;
+        transform.localScale = Vector3.one * 0.5f;
+        small = true;
     }
     private void Construct()
     {
@@ -26,10 +45,7 @@ public class Astroid : MonoBehaviour
         _filter.mesh = meshes[Random.Range(0, meshes.Count)];
         _renderer.material = materials[Random.Range(0, materials.Count)];
         
-        if(Random.Range(0,10) > 5)
-        {
-            direction = -1;
-        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -37,6 +53,11 @@ public class Astroid : MonoBehaviour
         {
             ExplosionEffect();
 
+            if (!small)
+            {
+                Instantiate(gameObject, transform.position, Quaternion.identity).GetComponent<Astroid>().ConstructedAgain(-1, transform.position);
+                Instantiate(gameObject, transform.position, Quaternion.identity).GetComponent<Astroid>().ConstructedAgain(1, transform.position);
+            }
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
