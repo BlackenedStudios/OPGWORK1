@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 1703049545}
   - component: {fileID: 1703049546}
   m_Layer: 0
-  m_Name: AstroidSpawner
+  m_Name: SpawnController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
