@@ -57,7 +57,7 @@ public class Astroid : MonoBehaviour
     private void FixedUpdate()
     {
         _filter.transform.Rotate(Vector3.one * 45 * Time.deltaTime);
-        transform.Translate((Vector3.down * 0.4f + Vector3.right * direction) * Time.deltaTime);
+        transform.Translate((Vector3.down * 0.5f + Vector3.right * direction) * Time.deltaTime);
 
         if (Mathf.Abs(transform.position.x) > 4.5) direction = -direction;
     }
